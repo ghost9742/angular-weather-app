@@ -1,0 +1,152 @@
+<div class="search">
+  <form [formGroup]="testGroup" method="get" #form>
+    <input
+      (keyup)="onSubmit()"
+      type="text"
+      placeholder="Search city"
+      name="city"
+      #weatherSearchInput
+      autocomplete="off"
+    />
+  </form>
+</div>
+
+<div class="container">
+  <!--  DropDown Starts  -->
+  <div class="card" [hidden]="!showSearches">
+    <div class="search">
+      <!-- <div *ngFor="let city of searchedCities" value="city">
+        <button>{{ city }}</button>
+      </div> -->
+      <select (change)="getSelectedValue($event)" name="" id="">
+        <option *ngFor="let city of searchedCities" [value]="city">
+          {{ city }}
+        </option>
+      </select>
+    </div>
+    <p
+      class="search"
+      *ngIf="searchedCities && searchedCities.length <= 0 && !isSearching"
+    >
+      No city found
+    </p>
+    <p class="search" [hidden]="!isSearching">Searching cities...</p>
+  </div>
+  <!--  DropDown Ends  -->
+  <div class="upper-data">
+    <img
+      src="../assets/clouds.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Clouds'"
+    />
+    <img
+      src="../assets/thunderstorms.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Thunderstorm'"
+    />
+    <img
+      src="../assets/drizzle.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Drizzle'"
+    />
+    <img
+      src="../assets/rain.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Rain'"
+    />
+    <img
+      src="../assets/snow.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Snow'"
+    />
+    <img
+      src="../assets/mist.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Mist'"
+    />
+    <img
+      src="../assets/smoke.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Smoke'"
+    />
+    <img
+      src="../assets/haze.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Haze'"
+    />
+    <img
+      src="../assets/dust.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Dust'"
+    />
+    <img
+      src="../assets/fog.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Fog'"
+    />
+    <img
+      src="../assets/sand.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Sand'"
+    />
+    <img
+      src="../assets/sand.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Dust'"
+    />
+    <img
+      src="../assets/tornado.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Tornado'"
+    />
+    <img
+      src="../assets/clear.svg"
+      alt="cold temperature image"
+      *ngIf="weather === 'Clear'"
+    />
+
+    <div class="weather-data">
+      <div class="location">{{ cityName }}</div>
+      <div class="temperature">{{ temp }}°C</div>
+      <div class="weather">{{ weather }}</div>
+    </div>
+  </div>
+  <div class="lower-data">
+    <div class="more-info-label">More Information</div>
+    <div class="more-info-container">
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon [icon]="faTemperatureLow" class="icon-low"></fa-icon>
+          <span>min</span>
+        </div>
+        <div class="info-block-value">{{ temp_min }}°C</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon [icon]="faTemperatureHigh" class="icon-high"></fa-icon>
+          <span>max</span>
+        </div>
+        <div class="info-block-value">{{ temp_max }}°C</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon [icon]="faDroplet" class="icon-humidity"></fa-icon>
+          <span>humidity</span>
+        </div>
+        <div class="info-block-value">{{ humidity }}%</div>
+      </div>
+
+      <div class="info-block">
+        <div class="info-block-label">
+          <fa-icon [icon]="faWind" class="icon-wind"></fa-icon>
+          <span>wind</span>
+        </div>
+        <div class="info-block-value">{{ wind }} km/h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
